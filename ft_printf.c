@@ -6,7 +6,7 @@
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/22 13:31:54 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/23 12:27:38 by nharra           ###   ########.fr       */
+/*   Updated: 2019/09/23 14:13:20 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,5 @@ void		put_nsym(int count, int c)
 
 int		main(void)
 {
-	ft_printf("fffff\n%d\naaa\n", -100);
+	ft_printf("fffff%#0-10.1llx\n", 31);
 }

@@ -6,7 +6,7 @@
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/22 17:48:51 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/23 12:28:47 by nharra           ###   ########.fr       */
+/*   Updated: 2019/09/23 13:35:37 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 int					check_info(t_print_info *info, const char **ptr)
 {
 	ft_bzero(info, sizeof(*info));
+	++(*ptr);
 	check_flag(info, ptr);
 	info->width = ft_atoi(ptr);
 	if (**ptr == '.')

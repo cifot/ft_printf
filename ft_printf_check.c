@@ -6,7 +6,7 @@
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/22 18:41:03 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/23 12:16:45 by nharra           ###   ########.fr       */
+/*   Updated: 2019/09/23 14:14:09 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,20 @@ void		check_flag(t_print_info *info, const char **ptr)
 	while (**ptr)
 	{
 		if (**ptr == '+')
-			info->flags &= flag_plus;
+			info->flags |= flag_plus;
 		else if (**ptr == '-')
 			info->flags &= flag_minus;
 		else if (**ptr == ' ')
-			info->flags &= flag_space;
+			info->flags |= flag_space;
 		else if (**ptr == '#')
-			info->flags &= flag_hash;
+			info->flags |= flag_hash;
 		else if (**ptr == '0')
-			info->flags &= flag_zero;
+			info->flags |= flag_zero;
 		else
 			return ;
 		++(*ptr);
 	}
+	return ;
 }
 
 static int	check_lsize(t_print_info *info, const char **ptr)
@@ -105,5 +106,6 @@ int			check_type(t_print_info *info, const char **ptr)
 		info->type = type_u;
 	else
 		return (-1);
+	++(*ptr);
 	return (0);
 }
