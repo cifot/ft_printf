@@ -6,7 +6,7 @@
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/22 18:41:03 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/22 19:17:07 by nharra           ###   ########.fr       */
+/*   Updated: 2019/09/23 12:16:45 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ static int	check_hsize(t_print_info *info, const char **ptr)
 
 void		check_size(t_print_info *info, const char **ptr)
 {
-	if (!check_ltype(info, ptr))
+	if (!check_lsize(info, ptr))
 	{
-		if (!check_htype(info, ptr))
+		if (!check_hsize(info, ptr))
 		{
 			if (**ptr == 'L')
 			{
@@ -89,7 +89,7 @@ void		check_size(t_print_info *info, const char **ptr)
 	}
 }
 
-int			check_info(t_print_info *info, const char **ptr)
+int			check_type(t_print_info *info, const char **ptr)
 {
 	if (**ptr == 'x')
 		info->type = type_x;

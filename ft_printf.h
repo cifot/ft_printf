@@ -6,14 +6,15 @@
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/20 09:26:05 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/22 19:16:19 by nharra           ###   ########.fr       */
+/*   Updated: 2019/09/23 12:29:17 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
-# define FT_PRINT_H
+# define FT_PRINTF_H
 # include <stdlib.h>
 # include <stdarg.h>
+# include <stdio.h>
 
 typedef enum	e_flags {
 				flag_plus = 1,
@@ -50,14 +51,20 @@ typedef struct		s_print_info
 	t_type			type;
 }					t_print_info;
 
-int					putull_base(unsigned long long num, int base,
-								t_print_info *info);
-int					putll_base(long long num, int base,t_print_info *info);
+int					putull_base(unsigned long long num, t_print_info *info);
+int					putll_base(long long num, t_print_info *info);
 int					ull_len_base(unsigned long long num, int base);
 void				put_nsym(int count, int c);
 void				ft_bzero(void *s, size_t n);
 void				check_flag(t_print_info *info, const char **ptr);
 int					ft_atoi(const char **str);
 void				check_size(t_print_info *info, const char **ptr);
+int					check_type(t_print_info *info, const char **ptr);
+void				put_nsym(int count, int c);
+int					parser(const char *format, va_list params, int ret_value);
+int					ull_len_base_withflags(unsigned long long num,
+											t_print_info *info);
+int					ll_len_base_withflags(long long num,
+											t_print_info *info);
 
 #endif
