@@ -6,7 +6,7 @@
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/20 09:26:05 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/23 12:29:17 by nharra           ###   ########.fr       */
+/*   Updated: 2019/09/24 11:26:36 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ typedef enum		e_type {
 				type_i,
 				type_x,
 				type_X,
-				type_o
+				type_o,
+				type_f
 }				t_type;
 
 typedef struct		s_print_info

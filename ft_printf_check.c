@@ -6,7 +6,7 @@
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/22 18:41:03 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/23 14:14:09 by nharra           ###   ########.fr       */
+/*   Updated: 2019/09/24 11:26:26 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void		check_flag(t_print_info *info, const char **ptr)
 		if (**ptr == '+')
 			info->flags |= flag_plus;
 		else if (**ptr == '-')
-			info->flags &= flag_minus;
+			info->flags |= flag_minus;
 		else if (**ptr == ' ')
 			info->flags |= flag_space;
 		else if (**ptr == '#')
@@ -104,6 +104,8 @@ int			check_type(t_print_info *info, const char **ptr)
 		info->type = type_o;
 	else if (**ptr == 'u')
 		info->type = type_u;
+	else if (**ptr == 'f')
+		info->type = type_f;
 	else
 		return (-1);
 	++(*ptr);

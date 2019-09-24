@@ -6,7 +6,7 @@
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/23 11:58:39 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/23 11:59:35 by nharra           ###   ########.fr       */
+/*   Updated: 2019/09/24 11:19:46 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,6 @@ int		ll_len_base_withflags(long long num, t_print_info *info)
 	u_num = num;
 	if (info->flags & (flag_plus | flag_space))
 		++len;
-	else if (info->flags & flag_hash)
-	{
-		if (info->type == type_X || info->type == type_x)
-			len += 2;
-		else if (info->type == type_o)
-			++len;
-	}
 	if (num < 0)
 	{
 		if (len == 0)

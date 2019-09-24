@@ -6,7 +6,7 @@
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/22 17:48:51 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/23 13:35:37 by nharra           ###   ########.fr       */
+/*   Updated: 2019/09/24 12:00:57 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int			print_d_continue(t_print_info *info, long long num)
 		putll_base(num, info);
 	if (len < info->width)
 	{
-		if (info->flags & flag_zero)
+		if ((info->flags & flag_zero) && (info->precision == 0))
 			put_nsym(info->width - len, '0');
 		else
 			put_nsym(info->width - len, ' ');
@@ -67,10 +67,10 @@ static int			print_u_continue(t_print_info *info,
 		num = (unsigned short int)num;
 	len = ull_len_base_withflags(num, info);
 	if (info->flags & flag_minus)
-		putull_base(num, info);
+		len = putull_base(num, info);
 	if (len < info->width)
 	{
-		if (info->flags & flag_zero)
+		if ((info->flags & flag_zero) && (info->precision == 0))
 			put_nsym(info->width - len, '0');
 		else
 			put_nsym(info->width - len, ' ');

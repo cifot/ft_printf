@@ -6,7 +6,7 @@
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/20 08:43:36 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/23 12:16:03 by nharra           ###   ########.fr       */
+/*   Updated: 2019/09/24 12:03:09 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int		putull_base(unsigned long long num, t_print_info *info)
 		if (info->flags & flag_hash)
 		{
 			len = 2;
-			write(1, "0x", 1);
+			write(1, "0x", 2);
 		}
 	}
 	else if (info->type == type_o)
@@ -66,7 +66,7 @@ int		putull_base(unsigned long long num, t_print_info *info)
 		}
 	}
 	else
-		base = 8;
+		base = 10;
 	return (len + putnum_base(num, base, info));
 }
 
