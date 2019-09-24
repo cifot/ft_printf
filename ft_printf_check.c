@@ -6,7 +6,7 @@
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/22 18:41:03 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/24 11:26:26 by nharra           ###   ########.fr       */
+/*   Updated: 2019/09/24 22:38:53 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,12 @@ int			check_type(t_print_info *info, const char **ptr)
 		info->type = type_u;
 	else if (**ptr == 'f')
 		info->type = type_f;
+	else if (**ptr == 'c')
+		info->type = type_c;
+	else if (**ptr == 's')
+		info->type = type_s;
+	else if (**ptr == 'p')
+		info->type = type_p;
 	else
 		return (-1);
 	++(*ptr);

@@ -6,7 +6,7 @@
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/20 08:43:36 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/24 12:03:09 by nharra           ###   ########.fr       */
+/*   Updated: 2019/09/24 22:34:19 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 #include <stdio.h>
 #include "ft_printf.h"
 
-int		putnum_base(unsigned long long num, int base, t_print_info *info)
+int				putnum_base(unsigned long long num, int base,
+							t_print_info *info)
 {
 	unsigned long long	rank;
 	char				*base_str;
@@ -22,9 +23,7 @@ int		putnum_base(unsigned long long num, int base, t_print_info *info)
 
 	base_str = "0123456789abcdef";
 	if (info->type == type_X)
-	{
 		base_str = "0123456789ABCDEF";
-	}
 	len_num = ull_len_base(num, base);
 	if (info->precision > len_num)
 	{
@@ -42,7 +41,7 @@ int		putnum_base(unsigned long long num, int base, t_print_info *info)
 	return (len_num);
 }
 
-int		putull_base(unsigned long long num, t_print_info *info)
+int				putull_base(unsigned long long num, t_print_info *info)
 {
 	int 				base;
 	int					len;
@@ -70,7 +69,7 @@ int		putull_base(unsigned long long num, t_print_info *info)
 	return (len + putnum_base(num, base, info));
 }
 
-int		putll_base(long long num, t_print_info *info)
+int				putll_base(long long num, t_print_info *info)
 {
 	unsigned long long	u_num;
 	int					len;
@@ -97,4 +96,16 @@ int		putll_base(long long num, t_print_info *info)
 		u_num = -u_num;
 	}
 	return (len + putnum_base(u_num, 10, info));
+}
+
+void		put_nsym(int count, int c)
+{
+	int i;
+
+	i = 0;
+	while (i < count)
+	{
+		write(1, &c, 1);
+		++i;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/20 09:26:05 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/24 11:26:36 by nharra           ###   ########.fr       */
+/*   Updated: 2019/09/24 22:36:30 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ typedef enum		e_type {
 				type_x,
 				type_X,
 				type_o,
-				type_f
+				type_f,
+				type_c,
+				type_p,
+				type_s
 }				t_type;
 
 typedef struct		s_print_info
@@ -51,7 +54,7 @@ typedef struct		s_print_info
 	t_size_type		size_type;
 	t_type			type;
 }					t_print_info;
-
+int					ft_printf(const char *format, ...);
 int					putull_base(unsigned long long num, t_print_info *info);
 int					putll_base(long long num, t_print_info *info);
 int					ull_len_base(unsigned long long num, int base);
@@ -67,5 +70,15 @@ int					ull_len_base_withflags(unsigned long long num,
 											t_print_info *info);
 int					ll_len_base_withflags(long long num,
 											t_print_info *info);
+int					putnum_base(unsigned long long num, int base,
+								t_print_info *info);
+size_t				ft_strlen(const char *s);
+int					print_params(t_print_info *info, va_list params);
+int					print_d(t_print_info *info, va_list params);
+int					print_u(t_print_info *info, va_list params);
+int					print_p(t_print_info *info, va_list params);
+int					print_s(t_print_info *info, va_list params);
+int					print_c(t_print_info *info, va_list params);
+
 
 #endif
