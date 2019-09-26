@@ -6,7 +6,7 @@
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/22 17:48:51 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/25 14:09:52 by nharra           ###   ########.fr       */
+/*   Updated: 2019/09/26 22:16:37 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,35 +36,29 @@ int					check_info(t_print_info *info, const char **ptr)
 	return (0);
 }
 
-int					parser(const char *format, va_list params, int ret_value)
+int					parser(const char *format, va_list params)
 {
 	const char		*ptr1;
 	const char		*ptr2;
-	int				tmp_value;
+	int				ret_value;
 	t_print_info	info;
 
+	ret_value = 0;
 	ptr1 = format;
 	ptr2 = format;
-	tmp_value = 0;
 	while (*ptr2)
 	{
 		if (*ptr2 == '%')
 		{
-			write(1, ptr1, ptr2 - ptr1);
-			ret_value += tmp_value;
-			if ((check_info(&info, &ptr2) == -1) ||
-			((tmp_value = print_params(&info, params)) == -1))
+			ret_value += write(1, ptr1, ptr2 - ptr1);
+			if (check_info(&info, &ptr2) == -1)
 				return (-1);
-			ret_value += tmp_value;
-			tmp_value = 0;
+			ret_value += print_params(&info, params);
 			ptr1 = ptr2;
 		}
 		else
-		{
-			++tmp_value;
 			++ptr2;
-		}
 	}
-	write(1, ptr1, ptr2 - ptr1);
-	return (ret_value + ptr2 - ptr1);
+	ret_value += write(1, ptr1, ptr2 - ptr1);
+	return (ret_value);
 }

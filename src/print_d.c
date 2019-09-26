@@ -6,7 +6,7 @@
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 20:14:19 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/26 15:37:48 by nharra           ###   ########.fr       */
+/*   Updated: 2019/09/26 21:08:07 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 
 static void		check_flags(t_print_info *info, char **s)
 {
-	if (info->flags & flag_space)
-		ft_join_beg(s, " ");
-	else if (info->flags & flag_plus)
+	if (info->flags & flag_plus)
 		ft_join_beg(s, "+");
+	else if (info->flags & flag_space)
+		ft_join_beg(s, " ");
 }
 
 static void		without_minus(t_print_info *info, char **s, int *len)
@@ -61,13 +61,13 @@ static void		with_minus(t_print_info *info, char **s, int *len)
 		{
 			if (info->flags & flag_zero)
 			{
-				ft_join_beg(s, "-");
 				join_nsym(s, 0, info->width - *len - 1, '0');
+				ft_join_beg(s, "-");
 			}
 			else
 			{
-				join_nsym(s, 0, info->width - *len - 1, ' ');
 				ft_join_beg(s, "-");
+				join_nsym(s, 0, info->width - *len - 1, ' ');
 			}
 		}
 	}
@@ -92,7 +92,9 @@ static int		print_d_continue(t_print_info *info, long long num)
 		with_minus(info, &s, &len);
 	else
 		without_minus(info, &s, &len);
-	return (write(1, s, ft_strlen(s)));
+	len = write(1, s, ft_strlen(s));
+	free(s);
+	return (len);
 }
 
 int			print_d(t_print_info *info, va_list params)
@@ -110,6 +112,9 @@ int			print_d(t_print_info *info, va_list params)
 	else if (info->size_type == size_h)
 		ll_num = (short int)ll_num;
 	if (info->precision == 0 && ll_num == 0)
-		return (0);
+	{
+		put_nsym(info->width, ' ');
+		return (info->width);
+	}
 	return (print_d_continue(info, ll_num));
 }
