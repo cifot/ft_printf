@@ -6,7 +6,7 @@
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 20:14:19 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/25 15:13:12 by nharra           ###   ########.fr       */
+/*   Updated: 2019/09/26 11:16:17 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 static int	print_d_continue(t_print_info *info, long long num)
 {
-	int len;
+	char	*s;
+	size_t	len;
 
-	len = ll_len_base_withflags(num, info);
+	len = ll_len_base(num, info);
 	if (info->flags & flag_minus)
 	{
 		len = putll_base(num, info);

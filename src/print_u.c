@@ -6,7 +6,7 @@
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 20:19:16 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/25 15:12:58 by nharra           ###   ########.fr       */
+/*   Updated: 2019/09/26 11:45:49 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@
 static int	print_u_continue(t_print_info *info,
 									unsigned long long num)
 {
-	int len;
+	char	*s;
+	size_t	len;
 
-	len = ull_len_base_withflags(num, info);
+	if (!(s = ull_base(num, info)))
+		return (0);
 	if (info->flags & flag_minus)
 	{
-		len = putull_base(num, info);
-		if (info->width > len)
+		if (info->precision > 0)
 		{
-			put_nsym(info->width - len, ' ');
-			len = info->width;
+
 		}
 	}
 	else if (len < info->width)

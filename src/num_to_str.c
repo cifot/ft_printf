@@ -1,111 +1,82 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_num.c                                          :+:      :+:    :+:   */
+/*   num_to_str.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/20 08:43:36 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/24 22:34:19 by nharra           ###   ########.fr       */
+/*   Updated: 2019/09/26 11:21:34 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
 #include "ft_printf.h"
+#include <stdlib.h>
 
-int				putnum_base(unsigned long long num, int base,
+char			*num_base(unsigned long long num, unsigned base,
 							t_print_info *info)
 {
 	unsigned long long	rank;
 	char				*base_str;
 	int					len_num;
+	int					i;
+	char				*s;
 
 	base_str = "0123456789abcdef";
 	if (info->type == type_X)
 		base_str = "0123456789ABCDEF";
 	len_num = ull_len_base(num, base);
-	if (info->precision > len_num)
-	{
-		put_nsym(info->precision - len_num,'0');
-		len_num = info->precision;
-	}
+	if (!(s = (char *)malloc(sizeof(*s) * (len_num + 1))))
+		return (NULL);
 	rank = 1;
 	while (num / rank >= base)
 		rank *= base;
+	i = 0;
 	while (rank)
 	{
-		write(1, base_str + (num / rank) % base, 1);
+		s[i++] = *(base_str + (num / rank) % base);
 		rank /= base;
 	}
-	return (len_num);
+	s[i] = '/0';
+	return (s);
 }
 
-int				putull_base(unsigned long long num, t_print_info *info)
+char			*ull_base(unsigned long long num, t_print_info *info)
 {
 	int 				base;
-	int					len;
-
 	if (info->type == type_X || info->type == type_x)
-	{
 		base = 16;
-		if (info->flags & flag_hash)
-		{
-			len = 2;
-			write(1, "0x", 2);
-		}
-	}
 	else if (info->type == type_o)
-	{
 		base = 8;
-		if (info->flags & flag_hash)
-		{
-			len = 1;
-			write(1, "0", 1);
-		}
-	}
 	else
 		base = 10;
-	return (len + putnum_base(num, base, info));
+	return (putnum_base(num, base, info));
 }
 
-int				putll_base(long long num, t_print_info *info)
+char			*ll_base(long long num, t_print_info *info)
 {
 	unsigned long long	u_num;
-	int					len;
+	char				*num_str;
 
-	len = 0;
 	u_num = num;
 	if (num >= 0)
 	{
-		if (info->flags & flag_plus)
-		{
-			++len;
-			write(1, "+", 1);
-		}
-		else if (info->flags & flag_space)
-		{
-			++len;
-			write(1, " ", 1);
-		}
+		num_str = putnum_base(u_num, 10, info);
 	}
 	else
 	{
-		++len;
-		write(1, "-", 1);
 		u_num = -u_num;
+		num_str = putnum_base(u_num, 10, info);
 	}
-	return (len + putnum_base(u_num, 10, info));
+	return (num_str);
 }
 
-void		put_nsym(int count, int c)
+void		put_nsym(int count, char c)
 {
-	int i;
+	char *s;
 
-	i = 0;
-	while (i < count)
-	{
-		write(1, &c, 1);
-		++i;
-	}
+	if (!(s = str_nsym(count, c)))
+		return ;
+	write(1, s, ft_strlen(s));
+	free(s);
 }

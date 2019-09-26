@@ -6,7 +6,7 @@
 #    By: nharra <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/15 15:50:31 by nharra            #+#    #+#              #
-#    Updated: 2019/09/25 12:43:47 by nharra           ###   ########.fr        #
+#    Updated: 2019/09/26 10:45:20 by nharra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SOURCES_UTILS =\
 	ft_atoi.c\
 	ft_bzero.c\
 	ft_strlen.c\
+	ft_strjoin.c
 
 OBJECTS_DIR = obj
 
