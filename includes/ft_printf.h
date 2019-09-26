@@ -6,7 +6,7 @@
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/20 09:26:05 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/26 11:21:20 by nharra           ###   ########.fr       */
+/*   Updated: 2019/09/26 14:03:14 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ typedef struct		s_print_info
 }					t_print_info;
 
 int					ft_printf(const char *format, ...);
-int					putull_base(unsigned long long num, t_print_info *info);
 int					putll_base(long long num, t_print_info *info);
 int					ull_len_base(unsigned long long num, int base);
 void				put_nsym(int count, char c);
@@ -81,5 +80,6 @@ int					print_percent(t_print_info *info);
 char				*str_nsym(int count, char sym);
 char				*ft_join_beg(char **s1, const char *s2);
 char				*ft_join(char **s1, const char *s2);
+char				*join_nsym(char **s, int flag, int count, char c);
 
 #endif

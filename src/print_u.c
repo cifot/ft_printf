@@ -6,39 +6,48 @@
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 20:19:16 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/26 11:45:49 by nharra           ###   ########.fr       */
+/*   Updated: 2019/09/26 14:28:13 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
+#include <unistd.h>
 
-static int	print_u_continue(t_print_info *info,
+static void		with_width(t_print_info *info, char **s, int *len)
+{
+	if (info->flags & flag_minus)
+	{
+		join_nsym(s, 1, info->width - *len, ' ');
+	}
+	else
+	{
+		if (info->flags & flag_zero)
+			join_nsym(s, 0, info->width - *len, '0');
+		else
+			join_nsym(s, 0, info->width - *len, ' ');
+	}
+	*len = info->width;
+}
+
+static int		print_u_continue(t_print_info *info,
 									unsigned long long num)
 {
 	char	*s;
-	size_t	len;
+	int		len;
 
 	if (!(s = ull_base(num, info)))
 		return (0);
-	if (info->flags & flag_minus)
+	len = ft_strlen(s);
+	if (info->precision > len)
 	{
-		if (info->precision > 0)
-		{
-
-		}
+		join_nsym(&s, 0, info->precision - len, '0');
+		len = ft_strlen(s);
 	}
-	else if (len < info->width)
+	if (info->width > len)
 	{
-		if ((info->flags & flag_zero))
-			put_nsym(info->width - len, '0');
-		else
-			put_nsym(info->width - len, ' ');
-		len = info->width;
-		putull_base(num, info);
+		with_width(info, &s, &len);
 	}
-	else
-		len = putull_base(num, info);
+	write(1, s, len);
 	return (len);
 }
 

@@ -6,7 +6,7 @@
 #    By: nharra <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/15 15:50:31 by nharra            #+#    #+#              #
-#    Updated: 2019/09/26 10:45:20 by nharra           ###   ########.fr        #
+#    Updated: 2019/09/26 14:00:16 by nharra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SOURCES =\
 	print_u.c\
 	print_s.c\
 	print_params.c\
-	put_num.c\
+	num_to_str.c\
 	put_percent.c\
 
 SOURCES_DIR = src
