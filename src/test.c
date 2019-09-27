@@ -6,7 +6,7 @@
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/25 11:45:13 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/26 13:40:18 by nharra           ###   ########.fr       */
+/*   Updated: 2019/09/27 12:56:04 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,10 @@
 
 int main(void)
 {
-	ft_printf("%hx", 4294967296);
+	long double d;
+	long long *p;
+
+	p = (long long *)(&(d));
+	*p = 0x00ffaaaaaaaaaaaa;
+	printf("%Lf", d);
 }

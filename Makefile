@@ -6,7 +6,7 @@
 #    By: nharra <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/15 15:50:31 by nharra            #+#    #+#              #
-#    Updated: 2019/09/26 21:23:30 by nharra           ###   ########.fr        #
+#    Updated: 2019/09/27 14:30:35 by nharra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SOURCES =\
 	print_p.c\
 	print_u.c\
 	print_s.c\
+	print_f.c\
 	print_oxX.c\
 	print_params.c\
 	num_to_str.c\
@@ -54,7 +55,7 @@ vpath %.h = $(INC_DIR)
 all :$(NAME)
 
 test: all
-	gcc $(FLAGS) $(OBJECTS)
+	gcc $(FLAGS) $(OBJECTS) -I $(INC_DIR) src/test.c
 
 $(OBJECTS_DIR):
 	mkdir $(OBJECTS_DIR)
