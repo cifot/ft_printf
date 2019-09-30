@@ -6,7 +6,7 @@
 #    By: nharra <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/15 15:50:31 by nharra            #+#    #+#              #
-#    Updated: 2019/09/27 14:30:35 by nharra           ###   ########.fr        #
+#    Updated: 2019/09/29 13:55:43 by nharra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ vpath %.h = $(INC_DIR)
 all :$(NAME)
 
 test: all
-	gcc $(FLAGS) $(OBJECTS) -I $(INC_DIR) src/test.c
+	gcc $(FLAGS) $(OBJECTS) src/test.c -I $(INC_DIR)
 
 $(OBJECTS_DIR):
 	mkdir $(OBJECTS_DIR)
