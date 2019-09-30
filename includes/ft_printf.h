@@ -6,7 +6,7 @@
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/20 09:26:05 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/27 14:30:26 by nharra           ###   ########.fr       */
+/*   Updated: 2019/09/30 16:36:45 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ int					print_u(t_print_info *info, va_list params);
 int					print_p(t_print_info *info, va_list params);
 int					print_s(t_print_info *info, va_list params);
 int					print_c(t_print_info *info, va_list params);
-int					print_oxX(t_print_info *info, va_list params);
+int					print_oxx(t_print_info *info, va_list params);
+int					print_oxx_zero_prec(t_print_info *info);
 int					print_f(t_print_info *info, va_list params);
 int					print_percent(t_print_info *info);
 char				*str_nsym(int count, char sym);

@@ -6,14 +6,13 @@
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/20 08:43:36 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/27 10:54:18 by nharra           ###   ########.fr       */
+/*   Updated: 2019/09/30 18:05:44 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 #include <stdlib.h>
 #include <unistd.h>
-#include <stdio.h>
 
 char			*num_base(unsigned long long num, unsigned base,
 							t_print_info *info)
@@ -45,7 +44,8 @@ char			*num_base(unsigned long long num, unsigned base,
 
 char			*ull_base(unsigned long long num, t_print_info *info)
 {
-	int 				base;
+	int		base;
+
 	if (info->type == type_X || info->type == type_x)
 		base = 16;
 	else if (info->type == type_o)
@@ -73,7 +73,7 @@ char			*ll_base(long long num, t_print_info *info)
 	return (num_str);
 }
 
-void		put_nsym(int count, char c)
+void			put_nsym(int count, char c)
 {
 	char *s;
 
@@ -83,7 +83,7 @@ void		put_nsym(int count, char c)
 	free(s);
 }
 
-char	*join_nsym(char **s, int flag, int count, char c)
+char			*join_nsym(char **s, int flag, int count, char c)
 {
 	char *tmp;
 
@@ -92,6 +92,6 @@ char	*join_nsym(char **s, int flag, int count, char c)
 		ft_join_beg(s, tmp);
 	else
 		ft_join(s, tmp);
-	free (tmp);
+	free(tmp);
 	return (*s);
 }

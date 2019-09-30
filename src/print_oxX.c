@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_oxX.c                                        :+:      :+:    :+:   */
+/*   print_oxx.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/26 20:57:30 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/26 21:33:32 by nharra           ###   ########.fr       */
+/*   Updated: 2019/09/30 19:10:50 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"ft_printf.h"
+#include "ft_printf.h"
 #include <unistd.h>
 
 static void		check_flags(t_print_info *info, char **s,
@@ -27,7 +27,8 @@ static void		check_flags(t_print_info *info, char **s,
 			ft_join_beg(s, "0X");
 	}
 	else if (info->type == type_o)
-		ft_join_beg(s, "0");
+		if (num != 0 && **s != '0')
+			ft_join_beg(s, "0");
 }
 
 static void		with_hash(t_print_info *info, char **s, int *len,
@@ -35,7 +36,10 @@ static void		with_hash(t_print_info *info, char **s, int *len,
 {
 	int i;
 
-	i = (info->type == type_o) ? 1 : 2;
+	if (num == 0)
+		i = 0;
+	else
+		i = (info->type == type_o) ? 1 : 2;
 	if (info->flags & flag_minus)
 	{
 		check_flags(info, s, num);
@@ -67,18 +71,14 @@ static void		without_hash(t_print_info *info, char **s, int *len)
 		else
 		{
 			if (info->flags & flag_zero)
-			{
 				join_nsym(s, 0, info->width - *len, '0');
-			}
 			else
-			{
 				join_nsym(s, 0, info->width - *len, ' ');
-			}
 		}
 	}
 }
 
-static int		print_oxX_continue(t_print_info *info,
+static int		print_oxx_continue(t_print_info *info,
 									unsigned long long num)
 {
 	char	*s;
@@ -92,6 +92,8 @@ static int		print_oxX_continue(t_print_info *info,
 		join_nsym(&s, 0, info->precision - len, '0');
 		len = info->precision;
 	}
+	if (info->precision >= 0)
+		info->flags = info->flags & (~flag_zero);
 	if (info->flags & flag_hash)
 		with_hash(info, &s, &len, num);
 	else
@@ -101,7 +103,7 @@ static int		print_oxX_continue(t_print_info *info,
 	return (len);
 }
 
-int			print_oxX(t_print_info *info, va_list params)
+int				print_oxx(t_print_info *info, va_list params)
 {
 	unsigned long long	ull_num;
 
@@ -116,16 +118,6 @@ int			print_oxX(t_print_info *info, va_list params)
 	else if (info->size_type == size_h)
 		ull_num = (unsigned short int)ull_num;
 	if (info->precision == 0 && ull_num == 0)
-	{
-		put_nsym(info->width - 1,' ');
-		if (info->type == type_o && info->flags == flag_hash)
-		{
-			write(1, "0", 1);
-			return (info->width > 0 ? info->width : 1);
-		}
-		else if (info->width > 0)
-			write(1, " ", 1);
-		return (info->width > 0 ? info->width : 0);
-	}
-	return (print_oxX_continue(info, ull_num));
+		return (print_oxx_zero_prec(info));
+	return (print_oxx_continue(info, ull_num));
 }

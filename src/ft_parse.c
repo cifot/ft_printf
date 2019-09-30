@@ -6,14 +6,13 @@
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/22 17:48:51 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/26 22:16:37 by nharra           ###   ########.fr       */
+/*   Updated: 2019/09/30 18:58:49 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include "ft_printf.h"
 #include <unistd.h>
-#include <stdio.h>
 
 int					check_info(t_print_info *info, const char **ptr)
 {
@@ -51,9 +50,8 @@ int					parser(const char *format, va_list params)
 		if (*ptr2 == '%')
 		{
 			ret_value += write(1, ptr1, ptr2 - ptr1);
-			if (check_info(&info, &ptr2) == -1)
-				return (-1);
-			ret_value += print_params(&info, params);
+			if (check_info(&info, &ptr2) != -1)
+				ret_value += print_params(&info, params);
 			ptr1 = ptr2;
 		}
 		else

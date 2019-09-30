@@ -6,7 +6,7 @@
 #    By: nharra <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/15 15:50:31 by nharra            #+#    #+#              #
-#    Updated: 2019/09/29 13:55:43 by nharra           ###   ########.fr        #
+#    Updated: 2019/09/30 19:10:24 by nharra           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ SOURCES =\
 	print_u.c\
 	print_s.c\
 	print_f.c\
-	print_oxX.c\
+	print_oxx.c\
+	print_oxx_zero_prec.c\
 	print_params.c\
 	num_to_str.c\
 	put_percent.c\
@@ -53,9 +54,6 @@ NAME = libftprintf.a
 vpath %.h = $(INC_DIR)
 
 all :$(NAME)
-
-test: all
-	gcc $(FLAGS) $(OBJECTS) src/test.c -I $(INC_DIR)
 
 $(OBJECTS_DIR):
 	mkdir $(OBJECTS_DIR)

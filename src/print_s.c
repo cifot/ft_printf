@@ -6,7 +6,7 @@
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 20:49:48 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/26 21:48:47 by nharra           ###   ########.fr       */
+/*   Updated: 2019/09/30 19:12:37 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int				print_s_continue(t_print_info *info, const char *s)
 	int		len;
 
 	len = ft_strlen(s);
-	if ((info->precision > 0) && (len > info->precision))
+	if ((info->precision >= 0) && (len > info->precision))
 		len = info->precision;
 	if (info->width > len)
 	{

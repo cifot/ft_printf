@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   print_oxx_zero_prec.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/09/22 13:31:54 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/30 17:34:35 by nharra           ###   ########.fr       */
+/*   Created: 2019/09/30 16:32:49 by nharra            #+#    #+#             */
+/*   Updated: 2019/09/30 16:36:48 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
-#include <unistd.h>
 #include "ft_printf.h"
+#include <unistd.h>
 
-int			ft_printf(const char *format, ...)
+int		print_oxx_zero_prec(t_print_info *info)
 {
-	va_list		params;
-	int			ret_value;
+	int		len;
 
-	va_start(params, format);
-	ret_value = parser(format, params);
-	va_end(params);
-	return (ret_value);
+	len = 0;
+	put_nsym(info->width - 1, ' ');
+	if (info->type == type_o && info->flags == flag_hash)
+	{
+		write(1, "0", 1);
+		return (info->width > 0 ? info->width : 1);
+	}
+	else if (info->width > 0)
+		write(1, " ", 1);
+	return (info->width > 0 ? info->width : 0);
 }

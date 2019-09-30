@@ -6,7 +6,7 @@
 /*   By: nharra <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/24 20:19:16 by nharra            #+#    #+#             */
-/*   Updated: 2019/09/27 09:44:38 by nharra           ###   ########.fr       */
+/*   Updated: 2019/09/30 16:28:26 by nharra           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ static int		print_u_continue(t_print_info *info,
 		join_nsym(&s, 0, info->precision - len, '0');
 		len = ft_strlen(s);
 	}
+	if (info->precision >= 0)
+		info->flags = info->flags & (~flag_zero);
 	if (info->width > len)
 	{
 		with_width(info, &s, &len);
@@ -52,7 +54,7 @@ static int		print_u_continue(t_print_info *info,
 	return (len);
 }
 
-int			print_u(t_print_info *info, va_list params)
+int				print_u(t_print_info *info, va_list params)
 {
 	unsigned long long	ull_num;
 
@@ -67,6 +69,9 @@ int			print_u(t_print_info *info, va_list params)
 	else if (info->size_type == size_h)
 		ull_num = (unsigned short int)ull_num;
 	if (info->precision == 0 && ull_num == 0)
-		return (0);
+	{
+		put_nsym(info->width, ' ');
+		return (info->width);
+	}
 	return (print_u_continue(info, ull_num));
 }
